@@ -1,6 +1,6 @@
 /**
  *
- * APDPlat - Application Product Development Platform Copyright (c) 2013, 杨尚川,
+ * APDPlat - Application Product Development Platform Copyright (c) 2013, 叶铱雷,
  * yang-shangchuan@qq.com
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 将候选答案生成为json格式
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class JsonGenerator {
 

@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 从Baidu搜索问题的证据
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class BaiduDataSource implements DataSource {
 
@@ -185,7 +185,7 @@ public class BaiduDataSource implements DataSource {
         String referer = "http://www.baidu.com/";
         for (int i = 0; i < PAGE; i++) {
             query = "http://www.baidu.com/s?tn=monline_5_dg&ie=utf-8&wd=" + query+"&oq="+query+"&usm=3&f=8&bs="+query+"&rsv_bp=1&rsv_sug3=1&rsv_sug4=141&rsv_sug1=1&rsv_sug=1&pn=" + i * PAGESIZE;
-            LOG.debug(query);
+            LOG.info(query);
             List<Evidence> evidences = searchBaidu(query, referer);
             referer = query;
             if (evidences != null && evidences.size() > 0) {
@@ -224,6 +224,7 @@ public class BaiduDataSource implements DataSource {
                     .header("Host", HOST)
                     .header("Referer", referer)
                     .get();
+            //LOG.info(document.toString());
             String resultCssQuery = "html > body > div > div > div > div > div";
             Elements elements = document.select(resultCssQuery);
             for (Element element : elements) {
@@ -260,7 +261,7 @@ public class BaiduDataSource implements DataSource {
     }
 
     public static void main(String args[]) {
-        Question question = new BaiduDataSource(FilesConfig.personNameQuestions).getQuestion("APDPlat的创始人是谁？");
+        Question question = new BaiduDataSource(FilesConfig.personNameQuestions).getQuestion("比亚迪是哪个汽车公司制造的？");
         LOG.info(question.toString());
     }
 }

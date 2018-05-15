@@ -1,49 +1,35 @@
-<%--
-   APDPlat - Application Product Development Platform
-   Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
-   
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-   
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-   
-   You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>    
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.apdplat.qa.model.Question"%>
 <%@page import="org.apdplat.qa.model.Evidence"%>
 <%@page import="org.apdplat.qa.model.CandidateAnswer"%>
 <%@page import="org.apdplat.qa.model.QuestionType"%>
 <%@page import="org.apdplat.qa.SharedQuestionAnsweringSystem"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
     request.setCharacterEncoding("UTF-8");
     String questionStr = request.getParameter("q");
     Question question = null;
-    List<CandidateAnswer> candidateAnswers = null;
-    if (questionStr != null && questionStr.trim().length() > 3) {
+    List<Evidence> evidenceList = null;
+    DecimalFormat df = new DecimalFormat("0.000");
+    if (questionStr != null && !"".equals(questionStr.trim())) {
         question = SharedQuestionAnsweringSystem.getInstance().answerQuestion(questionStr);
         if (question != null) {
-            candidateAnswers = question.getAllCandidateAnswer();
+            evidenceList = question.getEvidences();
         }
     }
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>人机问答系统演示</title>
+        <title>自动问答系统</title>
         <script type="text/javascript">
             function answer(){
                 var q = document.getElementById("q").value;
-                if(q == ""){
+                if(q === ""||q.trim()===""){
+                    console.log(1);
+                    alert("输入问题为空！");
                     return;
                 }
                 location.href = "index.jsp?q="+q;
@@ -51,34 +37,32 @@
         </script>
     </head>
     <body>
-        <h1><font color="blue">人机问答系统演示 <a href="https://github.com/ysc/QuestionAnsweringSystem" target="_blank">项目主页</a></font></h1>
-        <h2><a href="view.jsp?q=<%=questionStr%>">更多细节</a></h2>
                 <%
-                    if (questionStr == null || questionStr.trim().length() <= 3) {
-                %>      
-        <font color="red">请输入问题且长度大于3</font>
+                    if (questionStr == null || "".equals(questionStr)) {
+                %>
+        <font color="red">请输入问题</font>
             <%
-            } else if (candidateAnswers == null || candidateAnswers.size() == 0) {
+            } else if (evidenceList == null || evidenceList.size() == 0) {
             %>
         <font color="red">回答问题失败：<%=questionStr%></font><br/>
             <%
                 }
-                if (candidateAnswers != null && candidateAnswers.size() > 0) {
-            %>      
+                if (evidenceList != null && evidenceList.size() > 0) {
+            %>
         <font color="red">问题：</font><%=questionStr%><br/>
         <font color="red">答案：</font>
         <table>
-            <tr><th>序号</th><th>候选答案</th><th>答案评分</th></tr>
+            <tr><th>序号</th><th>相似问法</th><th>回答内容</th><th>内容评分</th><th>cos相似度</th><th>Jaccard相似度</th><th>最终相似度</th></tr>
                     <%
                         int i = 0;
-                        for (CandidateAnswer candidateAnswer : candidateAnswers) {
+                        for (Evidence evidence : evidenceList) {
                             if ((++i) == 1) {
-                    %>			
-            <tr><td><font color="red"><%=i%></font></td><td><font color="red"><%=candidateAnswer.getAnswer()%></font></td><td><font color="red"><%=candidateAnswer.getScore()%></font></td></tr>
+                    %>
+            <tr><td><font color="red"><%=i%></font></td><td><font color="red"><%=evidence.getTitle()%></font></td><td><font color="red"><%=evidence.getSnippet()%></font></td><td><font color="red"><%=df.format(evidence.getScore())%></font></td><td><font color="red"><%=df.format(evidence.getCosSimilarity())%></font></td><td><font color="red"><%=df.format(evidence.getJaccardSimilarity())%></font></td><td><font color="red"><%=df.format(evidence.getSimilarity())%></font></td></tr>
                         <%
                         } else {
                         %>
-            <tr><td><%=i%></td><td><%=candidateAnswer.getAnswer()%></td><td><%=candidateAnswer.getScore()%></td></tr>
+            <tr><td><%=i%></td><td><%=evidence.getTitle()%></td><td><%=evidence.getSnippet()%></td><td><%=df.format(evidence.getScore())%></td><td><%=df.format(evidence.getCosSimilarity())%></td><td><%=df.format(evidence.getJaccardSimilarity())%></td><td><%=df.format(evidence.getSimilarity())%></td></tr>
             <%
                     }
                 }
@@ -90,12 +74,8 @@
         %>
         <p>
             <b>可以像如下提问：</b><br/>
-            1、<a href="index.jsp?q=开源项目APDPlat应用级产品开发平台的作者是谁？">开源项目APDPlat应用级产品开发平台的作者是谁？</a><br/>
-            2、<a href="index.jsp?q=APDPlat开源项目的发起人是谁？">APDPlat开源项目的发起人是谁？</a><br/>
-            3、<a href="index.jsp?q=谁死后布了七十二疑冢？">谁死后布了七十二疑冢？</a><br/>
-            4、<a href="index.jsp?q=谁是资深Nutch搜索引擎专家？">谁是资深Nutch搜索引擎专家？</a><br/>
-            5、<a href="index.jsp?q=BMW是哪个汽车公司制造的？">BMW是哪个汽车公司制造的？</a><br/>
-        </p>
+            1、<a href="index.jsp?q=天翼4G套餐">天翼4G套餐</a><br/>
+            2、<a href="index.jsp?q=拆机服务">拆机服务</a><br/>
         <font color="red">输入问题：</font><input id="q" name="q" size="50" maxlength="50">
         <p></p>
         <h2><a href="#" onclick="answer();">查看答案</a></h2>

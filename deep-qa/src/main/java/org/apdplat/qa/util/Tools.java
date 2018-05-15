@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,14 +33,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,12 +56,33 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class Tools {
 
     private static final Logger LOG = LoggerFactory.getLogger(Tools.class);
     private static Map<String, Integer> map = new HashMap<>();
+    private static evidenceComparator evidenceComparator = new evidenceComparator();
+
+    public static evidenceComparator getEvidenceComparatorInstance(){
+        return evidenceComparator;
+    }
+
+    public static class evidenceComparator implements Comparator {
+
+        @Override
+        public int compare(Object o1, Object o2) {
+            Evidence e1 = (Evidence) o1;
+            Evidence e2 = (Evidence) o2;
+            if(e1.getScore() == e2.getScore()){
+                return 0;
+            }else if(e1.getScore()>e2.getScore()){
+                return -1;
+            }else{
+                return 1;
+            }
+        }
+    }
 
     public static String getTimeDes(long ms) {
         int ss = 1000;
@@ -504,5 +518,20 @@ public class Tools {
             }
         }
         return result;
+    }
+
+
+    public static Map<String,Integer> getFrequent(String text){
+        Map<String,Integer> map = new HashMap<>();
+        List<Word> words = WordParser.parse(text);
+        for (Word word : words) {
+            if(map.containsKey(word.getText())){
+                map.put(word.getText(),map.get(word.getText())+1);
+            }else{
+                map.put(word.getText(),1);
+            }
+        }
+
+        return map;
     }
 }

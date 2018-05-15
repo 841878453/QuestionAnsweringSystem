@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,13 +39,13 @@ import org.slf4j.LoggerFactory;
 /**
  * 问题有多个证据 证据用于提取候选答案
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class Question {
 
     private static final Logger LOG = LoggerFactory.getLogger(Question.class);
     private String question;
-    private final List<Evidence> evidences = new ArrayList<>();
+    private List<Evidence> evidences = new ArrayList<>();
 
     private QuestionType questionType = QuestionType.PERSON_NAME;
     private String expectAnswer;
@@ -70,11 +70,11 @@ public class Question {
         return candidateQuestionTypes;
     }
 
-    public Map.Entry<String, Integer> getHot() {
+    public Map.Entry<String, Integer> getHot() {//获取热词
         List<String> questionWords = getWords();
         Map<String, Integer> map = new HashMap<>();
         List<Word> words = WordParser.parse(getText());
-        for (Word word : words) {
+        for (Word word : words) {//统计词频
             Integer count = map.get(word.getText());
             if (count == null) {
                 count = 1;
@@ -214,6 +214,10 @@ public class Question {
         this.question = question;
     }
 
+    public void setEvidences(List<Evidence> evidences) {
+        this.evidences = evidences;
+    }
+
     public List<Evidence> getEvidences() {
         return this.evidences;
     }
@@ -236,7 +240,10 @@ public class Question {
         result.append("?. ").append(question).append("\n\n");
         for (Evidence evidence : this.evidences) {
             result.append("Title: ").append(evidence.getTitle()).append("\n");
-            result.append("Snippet: ").append(evidence.getSnippet()).append("\n\n");
+            result.append("Snippet: ").append(evidence.getSnippet()).append("\n");
+            result.append("Score: ").append(evidence.getScore()).append("\n");
+            result.append("cos相似度: ").append(evidence.getCosSimilarity()).append("\n\n");
+
         }
 
         return result.toString();

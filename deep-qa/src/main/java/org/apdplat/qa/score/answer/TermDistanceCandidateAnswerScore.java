@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 对候选答案进行评分 【词距评分组件】 分值+=原分值*（1/词距）
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class TermDistanceCandidateAnswerScore implements CandidateAnswerScore {
 
@@ -62,13 +62,13 @@ public class TermDistanceCandidateAnswerScore implements CandidateAnswerScore {
             LOG.debug("计算候选答案 " + candidateAnswer.getAnswer() + " 的词距");
             //3.1 计算candidateAnswer的分布
             List<Integer> candidateAnswerOffes = new ArrayList<>();
-            for (int i=0; i<evidenceWords.size(); i++) {
+            for (int i=0; i<evidenceWords.size(); i++) {//计算候选答案在证据中的位置
                 Word evidenceWord = evidenceWords.get(i);
                 if (evidenceWord.getText().equals(candidateAnswer.getAnswer())) {
                     candidateAnswerOffes.add(i);
                 }
             }
-            for (String questionTerm : questionTerms) {
+            for (String questionTerm : questionTerms) {//计算问题词在证据中的位置
                 //3.2 计算questionTerm的分布
                 List<Integer> questionTermOffes = new ArrayList<>();
                 for (int i=0; i<evidenceWords.size(); i++) {

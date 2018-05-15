@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apdplat.qa.datasource.DataSource;
 import org.apdplat.qa.model.Question;
+import org.apdplat.qa.questionSimilarityAnalysis.SimilarityAnalysis;
 import org.apdplat.qa.questiontypeanalysis.QuestionClassifier;
 import org.apdplat.qa.score.answer.CandidateAnswerScore;
 import org.apdplat.qa.score.evidence.EvidenceScore;
@@ -32,9 +33,14 @@ import org.apdplat.qa.select.CandidateAnswerSelect;
 /**
  * 问答系统
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public interface QuestionAnsweringSystem {
+
+
+    public SimilarityAnalysis getSimilarityAnalysis();
+
+    public void setSimilarityAnalysis(SimilarityAnalysis similarityAnalysis);
 
     /**
      * 问答系统使用的分类器

@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,18 +20,19 @@
 
 package org.apdplat.qa;
 
-import org.apdplat.qa.datasource.BaiduDataSource;
+import org.apdplat.qa.datasource.LocalDataSource;
 import org.apdplat.qa.system.CommonQuestionAnsweringSystem;
 import org.apdplat.qa.system.QuestionAnsweringSystem;
+import org.apdplat.qa.system.SimilarityQuestionAnsweringSystem;
 
 /**
  * 使用百度数据源的共享问答系统
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class SharedQuestionAnsweringSystem {
-    private static final QuestionAnsweringSystem QUESTION_ANSWERING_SYSTEM = new CommonQuestionAnsweringSystem();
+    private static final QuestionAnsweringSystem QUESTION_ANSWERING_SYSTEM = new SimilarityQuestionAnsweringSystem();
     static{
-        QUESTION_ANSWERING_SYSTEM.setDataSource(new BaiduDataSource());
+        QUESTION_ANSWERING_SYSTEM.setDataSource(new LocalDataSource());
     }
     public static QuestionAnsweringSystem getInstance(){
         return QUESTION_ANSWERING_SYSTEM;

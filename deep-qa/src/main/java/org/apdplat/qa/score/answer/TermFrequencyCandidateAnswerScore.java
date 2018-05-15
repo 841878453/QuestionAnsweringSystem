@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * 对候选答案进行评分 【词频评分组件】 title中出现一次算TITLE_WEIGHT次 snippet中出现一次算1次 候选答案的分值 += 词频 *
  * 权重
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class TermFrequencyCandidateAnswerScore implements CandidateAnswerScore {
 

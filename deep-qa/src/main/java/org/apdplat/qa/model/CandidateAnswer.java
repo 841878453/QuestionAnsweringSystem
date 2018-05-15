@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ package org.apdplat.qa.model;
 /**
  * 候选答案 每一个候选答案都包含答案名称以及分值
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class CandidateAnswer implements Comparable<CandidateAnswer> {
 

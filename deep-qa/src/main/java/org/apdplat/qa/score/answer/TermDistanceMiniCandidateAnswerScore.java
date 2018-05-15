@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  *
  * 候选答案的距离=候选答案和每一个问题词的最小距离之和
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class TermDistanceMiniCandidateAnswerScore implements CandidateAnswerScore {
 

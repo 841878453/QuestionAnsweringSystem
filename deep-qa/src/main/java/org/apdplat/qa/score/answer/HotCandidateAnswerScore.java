@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * 然后找出离这个词最近的候选答案 
  * 候选答案的分值翻倍
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class HotCandidateAnswerScore implements CandidateAnswerScore {
 

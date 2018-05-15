@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 在控制台输入问题 然后从google搜索证据 然后计算候选答案
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class ConsoleDemo {
 

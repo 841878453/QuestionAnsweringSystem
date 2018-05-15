@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,13 @@ package org.apdplat.qa.system;
 /**
  * 评分组件权重
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class ScoreWeight {
 
     private double termFrequencyCandidateAnswerScoreWeight = 1;
-    private double termDistanceCandidateAnswerScoreWeight = 1;
-    private double termDistanceMiniCandidateAnswerScoreWeight = 1;
+    private double termDistanceCandidateAnswerScoreWeight = 4;
+    private double termDistanceMiniCandidateAnswerScoreWeight = 4;
     private double textualAlignmentCandidateAnswerScoreWeight = 1;
     private double moreTextualAlignmentCandidateAnswerScoreWeight = 1;
     private double rewindTextualAlignmentCandidateAnswerScoreWeight = 1;

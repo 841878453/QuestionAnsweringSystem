@@ -29,13 +29,6 @@
         <developerConnection>scm:git:ssh://git@github.com/ysc/QuestionAnsweringSystem.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
-    <developers>
-        <developer>
-            <name>杨尚川</name>
-            <email>ysc@apdplat.org</email>
-            <url>http://yangshangchuan.iteye.com</url>
-        </developer>
-    </developers>
     
     <build>
         <plugins>

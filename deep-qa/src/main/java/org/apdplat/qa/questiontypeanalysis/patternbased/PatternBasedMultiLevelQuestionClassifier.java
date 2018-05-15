@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * 4、利用问题的【主谓宾 词 和 词性】进行匹配，如：发起人/n 是/v 谁/RW.RWPersonSingles
  * 5、利用问题的【主谓宾词性】进行匹配，如：n/v/RW.RWPersonSingle
  * 
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class PatternBasedMultiLevelQuestionClassifier extends AbstractQuestionClassifier {
 

@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通用问答系统实现
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class CommonQuestionAnsweringSystem extends QuestionAnsweringSystemImpl {
 
@@ -67,10 +67,10 @@ public class CommonQuestionAnsweringSystem extends QuestionAnsweringSystemImpl {
         //2、问答系统默认文件数据源		
         List<String> files = new ArrayList<>();
         files.add(FilesConfig.personNameMaterial);
-        files.add(FilesConfig.locationNameMaterial);
-        files.add(FilesConfig.organizationNameMaterial);
-        files.add(FilesConfig.numberMaterial);
-        files.add(FilesConfig.timeMaterial);
+        //files.add(FilesConfig.locationNameMaterial);
+        //files.add(FilesConfig.organizationNameMaterial);
+        //files.add(FilesConfig.numberMaterial);
+        //files.add(FilesConfig.timeMaterial);
         DataSource dataSource = new FileDataSource(files);
 
         super.setDataSource(dataSource);
@@ -113,7 +113,7 @@ public class CommonQuestionAnsweringSystem extends QuestionAnsweringSystemImpl {
         //5.4、文本对齐评分组件
         CandidateAnswerScore textualAlignmentCandidateAnswerScore = new TextualAlignmentCandidateAnswerScore();
         textualAlignmentCandidateAnswerScore.setScoreWeight(scoreWeight);
-        //5.5、文本对齐评分组件
+        //5.5、宽松文本对齐评分组件
         CandidateAnswerScore moreTextualAlignmentCandidateAnswerScore = new MoreTextualAlignmentCandidateAnswerScore();
         moreTextualAlignmentCandidateAnswerScore.setScoreWeight(scoreWeight);
         //5.6、回带文本对齐评分组件

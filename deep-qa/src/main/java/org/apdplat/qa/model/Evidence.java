@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, 杨尚川, yang-shangchuan@qq.com
+ * Copyright (c) 2013, 叶铱雷, 841878453@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,13 +28,16 @@ import org.apdplat.word.segmentation.Word;
 /**
  * 证据由title和snippet组成 对于同一个问题来说，不同的证据的重要性是不一样的，所以证据有分值 证据有多个候选答案
  *
- * @author 杨尚川
+ * @author 叶铱雷
  */
 public class Evidence {
 
     private String title;
     private String snippet;
     private double score = 1.0;
+    private double cosSimilarity = 0;
+    private double JaccardSimilarity = 0;
+    private double similarity = 0;
     private CandidateAnswerCollection candidateAnswerCollection;
 
     public List<String> getTitleWords() {
@@ -69,6 +72,30 @@ public class Evidence {
         return result;
     }
 
+    public double getCosSimilarity() {
+        return cosSimilarity;
+    }
+
+    public void setCosSimilarity(double cosSimilarity) {
+        this.cosSimilarity = cosSimilarity;
+    }
+
+    public double getSimilarity() {
+        return similarity;
+    }
+
+    public void setSimilarity(double similarity) {
+        this.similarity = similarity;
+    }
+
+    public double getJaccardSimilarity() {
+        return JaccardSimilarity;
+    }
+
+    public void setJaccardSimilarity(double jaccardSimilarity) {
+        JaccardSimilarity = jaccardSimilarity;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -99,5 +126,9 @@ public class Evidence {
 
     public void setCandidateAnswerCollection(CandidateAnswerCollection candidateAnswerCollection) {
         this.candidateAnswerCollection = candidateAnswerCollection;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 }
