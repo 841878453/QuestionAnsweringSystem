@@ -61,6 +61,11 @@ public class FileDataSource implements DataSource {
     }
 
     @Override
+    public List<Question> getQuestions(String questionStr) {
+        return null;
+    }
+
+    @Override
     public Question getQuestion(String questionStr) {
         return getAndAnswerQuestion(questionStr, null);
     }

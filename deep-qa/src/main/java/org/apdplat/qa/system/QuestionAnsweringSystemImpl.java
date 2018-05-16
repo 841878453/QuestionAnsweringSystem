@@ -51,6 +51,7 @@ import org.apdplat.qa.score.evidence.SkipBigramEvidenceScore;
 import org.apdplat.qa.score.evidence.TermMatchEvidenceScore;
 import org.apdplat.qa.select.CandidateAnswerSelect;
 import org.apdplat.qa.select.CommonCandidateAnswerSelect;
+import org.apdplat.qa.util.MySQLUtils;
 import org.apdplat.qa.util.Tools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,7 +168,10 @@ public class QuestionAnsweringSystemImpl implements QuestionAnsweringSystem {
 
     @Override
     public Question answerQuestion(String questionStr) {
-        List<Question> questions = dataSource.getQuestions();
+        List<Question> questions = dataSource.getQuestions(questionStr);
+        if(questions==null){
+            return null;
+        }
         Question question = similarityAnalysis.analysis(questionStr,questions);
         if (question != null) {
             return answerQuestion(question);
@@ -196,7 +200,7 @@ public class QuestionAnsweringSystemImpl implements QuestionAnsweringSystem {
         for (Question question : questions) {
 
             LOG.info("开始处理Question " + (questionIndex++) + "：" + question.getQuestion());
-
+            MySQLUtils.saveQuestionToHistory("",question);
             int i = 1;
             for (Evidence evidence : question.getEvidences()) {
                 LOG.debug("开始处理Evidence " + (i++));

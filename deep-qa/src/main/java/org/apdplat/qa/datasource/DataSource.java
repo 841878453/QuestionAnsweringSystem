@@ -39,6 +39,8 @@ public interface DataSource {
      */
     public List<Question> getQuestions();
 
+    public List<Question> getQuestions(String questionStr);
+
     /**
      * 获取问题以及问题的多个证据
      *

@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apdplat.qa.SharedQuestionAnsweringSystem;
 import org.apdplat.qa.model.CandidateAnswer;
+import org.apdplat.qa.model.Evidence;
 import org.apdplat.qa.model.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,22 +60,17 @@ public class AskServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         String questionStr = request.getParameter("q");
-        String n = request.getParameter("n");
-        int topN = -1;
-        if(n != null && StringUtils.isNumeric(n)){
-            topN = Integer.parseInt(n);
-        }
         Question question = null;
-        List<CandidateAnswer> candidateAnswers = null;
-        if (questionStr != null && questionStr.trim().length() > 3) {
+        List<Evidence> evidenceAnswers = null;
+        if (questionStr != null) {
             question = SharedQuestionAnsweringSystem.getInstance().answerQuestion(questionStr);
             if (question != null) {
-                candidateAnswers = question.getAllCandidateAnswer();
+                evidenceAnswers = question.getEvidences();
             }
         }
         LOG.info("问题："+questionStr); 
         try (PrintWriter out = response.getWriter()) {
-            String json = JsonGenerator.generate(candidateAnswers, topN);
+            String json = JsonGenerator.generate(evidenceAnswers);
             out.println(json);
             LOG.info("答案："+json);
         }

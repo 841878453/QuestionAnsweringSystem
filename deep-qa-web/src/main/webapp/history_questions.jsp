@@ -27,7 +27,7 @@
                             continue;
                         }
                 %>
-                    <tr><td><font color="red"><%=(i++)%> 、 <%=question.getQuestion()%></font></td><td><a target="_blank" href="index.jsp?q=<%=question.getQuestion().replaceAll("\"","").replaceAll("\'","")%>">简要答案</a></td></tr>
+                    <tr><td><font color="red"><%=(i++)%> 、 <%=question.getQuestion()%></font></td><td><a target="_blank" href="index.jsp?q=<%=question.getQuestion().replaceAll("\"","").replaceAll("\'","")%>">答案</a></td></tr>
                 <%
                     }
                 %>

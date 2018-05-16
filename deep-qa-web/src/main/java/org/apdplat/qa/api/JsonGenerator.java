@@ -22,10 +22,13 @@ package org.apdplat.qa.api;
 import java.util.ArrayList;
 import java.util.List;
 import org.apdplat.qa.datasource.BaiduDataSource;
+import org.apdplat.qa.datasource.LocalDataSource;
 import org.apdplat.qa.model.CandidateAnswer;
+import org.apdplat.qa.model.Evidence;
 import org.apdplat.qa.model.Question;
 import org.apdplat.qa.system.CommonQuestionAnsweringSystem;
 import org.apdplat.qa.system.QuestionAnsweringSystem;
+import org.apdplat.qa.system.SimilarityQuestionAnsweringSystem;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,25 +51,15 @@ public class JsonGenerator {
         return "{}";
     }
 
-    public static String generate(List<CandidateAnswer> candidateAnswers) {
-        return generate(candidateAnswers, -1);
+    public static String generate(List<Evidence> evidenceAnswers) {
+        return generate(evidenceAnswers, -1);
     }
-    public static String generate(List<CandidateAnswer> candidateAnswers, int topN) {
-        if(candidateAnswers==null){
+    public static String generate(List<Evidence> evidenceAnswers, int topN) {
+        if(evidenceAnswers==null){
             return "[]";
         }
-        if(topN > 0){
-            int len = candidateAnswers.size();
-            if(topN < len){
-                List<CandidateAnswer> tempCandidateAnswers = new ArrayList<>(topN);
-                for(int i=0; i<topN; i++){
-                    tempCandidateAnswers.add(candidateAnswers.get(i));
-                }
-                candidateAnswers = tempCandidateAnswers;
-            }
-        }
         try {
-            return MAPPER.writeValueAsString(candidateAnswers);
+            return MAPPER.writeValueAsString(evidenceAnswers);
         } catch (Exception e) {
             LOG.error("生成候选答案的json表示出错", e);
         }
@@ -74,18 +67,13 @@ public class JsonGenerator {
     }
 
     public static void main(String[] args) {
-        QuestionAnsweringSystem questionAnsweringSystem = new CommonQuestionAnsweringSystem();
-        questionAnsweringSystem.setDataSource(new BaiduDataSource());
-        String questionStr = "谁死后布了七十二疑冢？";
+        QuestionAnsweringSystem questionAnsweringSystem = new SimilarityQuestionAnsweringSystem();
+        questionAnsweringSystem.setDataSource(new LocalDataSource());
+        String questionStr = "办理宽带";
         Question question = questionAnsweringSystem.answerQuestion(questionStr);
         if (question != null) {
-            List<CandidateAnswer> candidateAnswers = question.getAllCandidateAnswer();
-            System.out.println(JsonGenerator.generate(candidateAnswers));
-            System.out.println(JsonGenerator.generate(candidateAnswers, 1));
-            System.out.println(JsonGenerator.generate(candidateAnswers, 2));
-            System.out.println(JsonGenerator.generate(candidateAnswers, 9));
-            System.out.println(JsonGenerator.generate(candidateAnswers, 100));
-            System.out.println(JsonGenerator.generate(candidateAnswers.get(0)));
+            List<Evidence> evidenceAnswers = question.getEvidences();
+            System.out.println(JsonGenerator.generate(evidenceAnswers));
         }
     }
 }

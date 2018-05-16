@@ -1,8 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.apdplat.qa.model.Question"%>
 <%@page import="org.apdplat.qa.model.Evidence"%>
-<%@page import="org.apdplat.qa.model.CandidateAnswer"%>
-<%@page import="org.apdplat.qa.model.QuestionType"%>
 <%@page import="org.apdplat.qa.SharedQuestionAnsweringSystem"%>
 <%@page import="java.util.List"%>
 <%@ page import="java.text.DecimalFormat" %>
@@ -52,17 +50,17 @@
         <font color="red">问题：</font><%=questionStr%><br/>
         <font color="red">答案：</font>
         <table>
-            <tr><th>序号</th><th>相似问法</th><th>回答内容</th><th>内容评分</th><th>cos相似度</th><th>Jaccard相似度</th><th>最终相似度</th></tr>
+            <tr><th>序号</th><th>相似问法</th><th>回答内容</th><th>内容评分</th><th>cos相似度</th><th>Jaccard相似度</th><th>Euclidean相似度</th></tr>
                     <%
                         int i = 0;
                         for (Evidence evidence : evidenceList) {
                             if ((++i) == 1) {
                     %>
-            <tr><td><font color="red"><%=i%></font></td><td><font color="red"><%=evidence.getTitle()%></font></td><td><font color="red"><%=evidence.getSnippet()%></font></td><td><font color="red"><%=df.format(evidence.getScore())%></font></td><td><font color="red"><%=df.format(evidence.getCosSimilarity())%></font></td><td><font color="red"><%=df.format(evidence.getJaccardSimilarity())%></font></td><td><font color="red"><%=df.format(evidence.getSimilarity())%></font></td></tr>
+            <tr><td><font color="red"><%=i%></font></td><td><font color="red"><%=evidence.getTitle()%></font></td><td><font color="red"><%=evidence.getSnippet()%></font></td><td><font color="red"><%=df.format(evidence.getScore())%></font></td><td><font color="red"><%=df.format(evidence.getCosSimilarity())%></font></td><td><font color="red"><%=df.format(evidence.getJaccardSimilarity())%></font></td><td><font color="red"><%=df.format(evidence.getEuclideanSimilarity())%></font></td></tr>
                         <%
                         } else {
                         %>
-            <tr><td><%=i%></td><td><%=evidence.getTitle()%></td><td><%=evidence.getSnippet()%></td><td><%=df.format(evidence.getScore())%></td><td><%=df.format(evidence.getCosSimilarity())%></td><td><%=df.format(evidence.getJaccardSimilarity())%></td><td><%=df.format(evidence.getSimilarity())%></td></tr>
+            <tr><td><%=i%></td><td><%=evidence.getTitle()%></td><td><%=evidence.getSnippet()%></td><td><%=df.format(evidence.getScore())%></td><td><%=df.format(evidence.getCosSimilarity())%></td><td><%=df.format(evidence.getJaccardSimilarity())%></td><td><%=df.format(evidence.getEuclideanSimilarity())%></td></tr>
             <%
                     }
                 }
@@ -83,6 +81,7 @@
             }
         %>  	
         <br/>
+         <h2><a href="add.jsp">增加问题与答案</a></h2><br/>
         <h2><a href="history_questions.jsp">其他用户曾经问过的问题</a></h2>
     </body>
 </html>

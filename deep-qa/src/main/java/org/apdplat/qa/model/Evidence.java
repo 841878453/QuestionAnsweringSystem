@@ -37,7 +37,7 @@ public class Evidence {
     private double score = 1.0;
     private double cosSimilarity = 0;
     private double JaccardSimilarity = 0;
-    private double similarity = 0;
+    private double EuclideanSimilarity = 0;
     private CandidateAnswerCollection candidateAnswerCollection;
 
     public List<String> getTitleWords() {
@@ -80,12 +80,12 @@ public class Evidence {
         this.cosSimilarity = cosSimilarity;
     }
 
-    public double getSimilarity() {
-        return similarity;
+    public double getEuclideanSimilarity() {
+        return EuclideanSimilarity;
     }
 
-    public void setSimilarity(double similarity) {
-        this.similarity = similarity;
+    public void setEuclideanSimilarity(double euclideanSimilarity) {
+        EuclideanSimilarity = euclideanSimilarity;
     }
 
     public double getJaccardSimilarity() {

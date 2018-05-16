@@ -43,10 +43,10 @@ public class CombinationSimilarityAnalysis implements SimilarityAnalysis{
         List<Evidence> evidenceList = questions.get(0).getEvidences();
         List<Evidence> newEvidenceList = new ArrayList<>();
         for(Evidence e:evidenceList){
-            double sim = e.getCosSimilarity()*similarityWeight.getCosSimilarity()+e.getJaccardSimilarity()*similarityWeight.getJaccardSimilarity();
-            LOG.info("相似度："+sim);
-            if(sim>=similarityWeight.getSimilarity()){
-                e.setSimilarity(sim);
+            LOG.info("Cos:"+e.getCosSimilarity());
+            LOG.info("Jaccard:"+e.getJaccardSimilarity());
+            LOG.info("Euclidean:"+e.getEuclideanSimilarity());
+            if(e.getCosSimilarity()>=similarityWeight.getCosSimilarity()&&e.getJaccardSimilarity()>=similarityWeight.getJaccardSimilarity()&&e.getEuclideanSimilarity()>=similarityWeight.getEuclideanSimilarity()){
                 newEvidenceList.add(e);
             }
         }

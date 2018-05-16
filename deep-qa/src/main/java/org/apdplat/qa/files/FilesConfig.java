@@ -37,4 +37,6 @@ public class FilesConfig {
     public static final String organizationNameQuestions = "/org/apdplat/qa/files/organization_name_questions.txt";
     public static final String numberQuestions = "/org/apdplat/qa/files/number_questions.txt";
     public static final String timeQuestions = "/org/apdplat/qa/files/time_questions.txt";
+
+    public static final String special = "/org/apdplat/qa/files/special.txt";
 }

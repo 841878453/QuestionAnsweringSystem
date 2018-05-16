@@ -1,10 +1,10 @@
 package org.apdplat.qa.questionSimilarityAnalysis;
 
 public class SimilarityWeight {
-    private double cosSimilarity = 0.7;
-    private double jaccardSimilarity = 0.3;
+    private double cosSimilarity = 0.5;
+    private double jaccardSimilarity = 0.4;
 
-    private double similarity = 0.5;
+    private double  euclideanSimilarity= 0.3;
 
     public SimilarityWeight() {
     }
@@ -21,12 +21,12 @@ public class SimilarityWeight {
         this.cosSimilarity = cosSimilarity;
     }
 
-    public double getSimilarity() {
-        return similarity;
+    public double getEuclideanSimilarity() {
+        return euclideanSimilarity;
     }
 
-    public void setSimilarity(double similarity) {
-        this.similarity = similarity;
+    public void setEuclideanSimilarity(double euclideanSimilarity) {
+        this.euclideanSimilarity = euclideanSimilarity;
     }
 
     public double getJaccardSimilarity() {

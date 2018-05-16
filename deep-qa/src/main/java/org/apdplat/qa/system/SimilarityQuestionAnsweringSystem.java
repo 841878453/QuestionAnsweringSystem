@@ -39,9 +39,11 @@ public class SimilarityQuestionAnsweringSystem extends QuestionAnsweringSystemIm
 
         SimilarityAnalysis cosSimilarityAnalysis = new CosSimilarityAnalysis();
         SimilarityAnalysis jaccardSimilarityAnalysis = new JaccardSimilarityAnalysis();
+        SimilarityAnalysis euclideanSimilarityAnalysis = new EuclideanSimilarityAnalysis();
         CombinationSimilarityAnalysis CombiSimilarityAnalysis = new CombinationSimilarityAnalysis();
         CombiSimilarityAnalysis.addSimilarityAnalysis(cosSimilarityAnalysis);
         CombiSimilarityAnalysis.addSimilarityAnalysis(jaccardSimilarityAnalysis);
+        CombiSimilarityAnalysis.addSimilarityAnalysis(euclideanSimilarityAnalysis);
         CombiSimilarityAnalysis.setSimilarityWeight(similarityWeight);
 
         super.setSimilarityAnalysis(CombiSimilarityAnalysis);
@@ -52,7 +54,12 @@ public class SimilarityQuestionAnsweringSystem extends QuestionAnsweringSystemIm
     public static void main(String[] args) {
         QuestionAnsweringSystem questionAnsweringSystem = new SimilarityQuestionAnsweringSystem();
         questionAnsweringSystem.setDataSource(new LocalDataSource());
-        Question q = questionAnsweringSystem.answerQuestion("我想问问天翼4G套餐");
-        LOG.info(q.toString());
+        Question q = questionAnsweringSystem.answerQuestion("宽带");
+        if(q!=null){
+            LOG.info(q.toString());
+        }else{
+            LOG.info("没有答案");
+        }
+
     }
 }

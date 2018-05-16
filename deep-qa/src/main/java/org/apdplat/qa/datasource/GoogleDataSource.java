@@ -88,6 +88,11 @@ public class GoogleDataSource implements DataSource {
     }
 
     @Override
+    public List<Question> getQuestions(String questionStr) {
+        return null;
+    }
+
+    @Override
     public List<Question> getAndAnswerQuestions(QuestionAnsweringSystem questionAnsweringSystem) {
         List<Question> questions = new ArrayList<>();
 

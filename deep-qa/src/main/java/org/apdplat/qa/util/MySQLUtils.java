@@ -114,7 +114,7 @@ public class MySQLUtils {
 
     public static List<Question> getHistoryQuestionsFromDatabase() {
         List<Question> questions = new ArrayList<>();
-        String questionSql = "select question from question";
+        String questionSql = "select question from history";
         Connection con = getConnection();
         if(con == null){
             return questions;
@@ -149,6 +149,64 @@ public class MySQLUtils {
     public static List<Question> getQuestionsFromDatabase() {
         List<Question> questions = new ArrayList<>();
         String questionSql = "select id,question from question";
+        String evidenceSql = "select title,snippet from evidence where question=?";
+        Connection con = getConnection();
+        if(con == null){
+            return questions;
+        }
+        PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
+        ResultSet rs = null;
+        ResultSet rs2 = null;
+        try {
+            //1、查询问题
+            pst = con.prepareStatement(questionSql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String que = rs.getString(2);
+                Question question = new Question();
+                question.setQuestion(que);
+
+                //2、查询证据
+                pst2 = con.prepareStatement(evidenceSql);
+                pst2.setInt(1, id);
+                rs2 = pst2.executeQuery();
+                while (rs2.next()) {
+                    String title = rs2.getString(1);
+                    String snippet = rs2.getString(2);
+                    Evidence evidence = new Evidence();
+                    evidence.setTitle(title);
+                    evidence.setSnippet(snippet);
+                    //3、关联问题很证据
+                    question.addEvidence(evidence);
+                }
+                questions.add(question);
+                close(null, pst2, rs2);
+            }
+        } catch (SQLException e) {
+            LOG.error("查询问题失败", e);
+        } finally {
+            close(con, pst, rs);
+        }
+        return questions;
+    }
+
+    public static List<Question> getQuestionsFromDatabaseLike(List<String> likeList) {
+        List<Question> questions = new ArrayList<>();
+        StringBuilder questionSqlBuilder = new StringBuilder("select id,question from question");
+        if(!likeList.isEmpty()){
+            questionSqlBuilder.append(" where");
+        }
+        for(String s:likeList){
+            questionSqlBuilder.append(" `question` like '%").append(s).append("%' or ");
+        }
+        if(!likeList.isEmpty()){
+            questionSqlBuilder.append(0);
+        }
+        String questionSql = questionSqlBuilder.toString();
+       // LOG.info(questionSql);
+
         String evidenceSql = "select title,snippet from evidence where question=?";
         Connection con = getConnection();
         if(con == null){
@@ -298,6 +356,46 @@ public class MySQLUtils {
             close(con, pst, rs);
         }
     }
+
+    public static void saveQuestionToHistory(String pre, Question question) {
+        //如果问题已经保存
+
+        String questionSql = "insert into history (question) values (?)";
+        Connection con = getConnection();
+        if(con == null){
+            return ;
+        }
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(questionSql, Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, pre + question.getQuestion().trim().replace("?", "").replace("？", ""));
+            ////1、保存问题
+            int count = pst.executeUpdate();
+            if (count == 1) {
+                LOG.info("保存问题成功");
+                ////2、获取自动生成的主键值
+                rs = pst.getGeneratedKeys();
+                long primaryKey = 0;
+                if (rs.next()) {
+                    primaryKey = (Long) rs.getObject(1);
+                }
+                //关闭pst和rs
+                close(pst, rs);
+                if (primaryKey == 0) {
+                    LOG.error("获取问题自动生成的主键失败");
+                    return;
+                }
+            } else {
+                LOG.error("保存问题失败");
+            }
+        } catch (SQLException e) {
+            LOG.error("保存问题失败，已存在");
+        } finally {
+            close(con, pst, rs);
+        }
+    }
+
 
     public static Connection getConnection() {
         Connection con = null;

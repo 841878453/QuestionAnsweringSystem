@@ -21,20 +21,21 @@
         </layout>
     </appender>
 
-    <logger name="org.apdplat.qa.datasource.BaiduDataSource" level="INFO"/>
-    <logger name="org.apdplat.qa.model" level="INFO"/>
-    <logger name="org.apdplat.qa.util" level="INFO"/>
-    <logger name="org.apdplat.qa.score.evidence.BigramEvidenceScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.evidence.SkipBigramEvidenceScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.evidence.TermMatchEvidenceScore" level="INFO"/>
+    <logger name="org.apdplat.qa.datasource.BaiduDataSource" level="DEBUG"/>
+    <logger name="org.apdplat.qa.model" level="DEBUG"/>
+    <logger name="org.apdplat.qa.util" level="DEBUG"/>
+    <logger name="org.apdplat.qa.system.QuestionAnsweringSystemImpl" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.evidence.BigramEvidenceScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.evidence.SkipBigramEvidenceScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.evidence.TermMatchEvidenceScore" level="DEBUG"/>
 
-    <logger name="org.apdplat.qa.score.answer.MoreTextualAlignmentCandidateAnswerScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.answer.HotCandidateAnswerScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.answer.RewindTextualAlignmentCandidateAnswerScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.answer.TermDistanceCandidateAnswerScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.answer.TermDistanceMiniCandidateAnswerScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.answer.TermFrequencyCandidateAnswerScore" level="INFO"/>
-    <logger name="org.apdplat.qa.score.answer.TextualAlignmentCandidateAnswerScore" level="INFO"/>
+    <logger name="org.apdplat.qa.score.answer.MoreTextualAlignmentCandidateAnswerScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.answer.HotCandidateAnswerScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.answer.RewindTextualAlignmentCandidateAnswerScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.answer.TermDistanceCandidateAnswerScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.answer.TermDistanceMiniCandidateAnswerScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.answer.TermFrequencyCandidateAnswerScore" level="DEBUG"/>
+    <logger name="org.apdplat.qa.score.answer.TextualAlignmentCandidateAnswerScore" level="DEBUG"/>
     <logger name="org.apache.commons" level="ERROR"/>
     <logger name="httpclient" level="ERROR"/>
     <root level="INFO">
