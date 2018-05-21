@@ -10,8 +10,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>自动问答系统</title>
+
     </head>
+    <style type="text/css">
+        .a_button{
+            width: 100px;
+            background: #42929d;
+            color: #fff;
+            border-radius: 5px;
+            border: 0;
+            height: 40px;
+            cursor: pointer;
+        }
+    </style>
+
     <body>
+
         <h2>其他用户曾经问过的问题（<%=questions.size() %>）：</h2>
                 <table>
                 <%
@@ -27,7 +41,7 @@
                             continue;
                         }
                 %>
-                    <tr><td><font color="red"><%=(i++)%> 、 <%=question.getQuestion()%></font></td><td><a target="_blank" href="index.jsp?q=<%=question.getQuestion().replaceAll("\"","").replaceAll("\'","")%>">答案</a></td></tr>
+                    <tr><td><font color="red"><%=(i++)%> 、 <%=question.getQuestion()%></font></td><td><button class="a_button"  onclick="goToView('<%=question.getQuestion().replaceAll("\"","").replaceAll("\'","")%>')">查看详细回答</button></td></tr>
                 <%
                     }
                 %>
@@ -40,6 +54,15 @@
                     }
                 %>
                 <br/>
-        <h2><a href="index.jsp">返回主页</a></h2>
+        <div><button class="a_button" onclick="goToIndex()">返回首页</button></div>
+        <script type="text/javascript">
+            function goToIndex(){
+                location.href="chat.html";
+            }
+
+            function goToView(questionStr){
+                location.href="view.jsp?q="+questionStr;
+            }
+        </script>
     </body>
 </html>

@@ -25,6 +25,16 @@
        width: 40%;
        height:20%;
    }
+
+   .a_button{
+       width: 100px;
+       background: #42929d;
+       color: #fff;
+       border-radius: 5px;
+       border: 0;
+       height: 40px;
+       cursor: pointer;
+   }
 </style>
 <body>
 <%
@@ -51,10 +61,16 @@
 <form action="" method="get">
     <font color="red">输入问题：</font><input id="question" name="question" size="50" maxlength="50"/><br/><br/>
     <font color="red">输入答案：</font><textarea id="answer" name="answer"  maxlength="200" class="answerText"></textarea><br/><br/>
-    <button type="submit" style="margin-left:10%;">提交</button>
-    <button type="reset">重置</button>
+    <button type="submit" style="margin-left:10%;" class="a_button">提交</button>
+    <button type="reset" class="a_button">重置</button>
 </form>
 <br/><br/><br/><br/>
-<h2><a href="index.jsp">返回首页</a></h2><br/>
+<div><button class="a_button" onclick="goToIndex()">返回首页</button></div>
+
+<script type="text/javascript">
+    function goToIndex(){
+        location.href="chat.html";
+    }
+</script>
 </body>
 </html>
